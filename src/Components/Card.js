@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 
 // Action builder
 import { setCheckCardState, changeCardDesc} from '../../action/actionCard';
-import { StyleSheet, Text, View , Button} from 'react-native';
+import { StyleSheet, Text, View , Button, ButtonGroup} from 'react-native';
+import{Card , CardBody, CardTitle, Button, CardText} from 'native-base';
 
 
 
 // Style
 import '../../style/card.css';
 
+const cards = this.props.cards; 
+const cardsList = cards.map(card => (card.id, card.desc))
 
 const Card = ({
     id,
@@ -21,9 +24,20 @@ const Card = ({
     // TODO: Put destructured props
     // <input type="checkbox" onChange={setCheckCardState( 1, true)}/>
 }) => (
-    <Button className="mycard">
-        <Text>{id}</Text>
-    </Button>
+    // <Button className="mycard">
+    //     <Text>{id}</Text>
+    // </Button>
+    <View>  
+        <Text> cards </Text>
+        <Text> {id} </Text>
+
+        <ButtonGroup
+            buttons= {cardsList}
+        
+        />
+    
+    </View>
+        
     );
     
     const mapStateToProps = (state, props) => ({

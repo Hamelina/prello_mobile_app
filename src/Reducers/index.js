@@ -1,6 +1,6 @@
-// import {combineReducers} from 'redux'; 
-// import card from './card_reducer'
+import {combineReducers} from 'redux'; 
+import card from './card_reducer'
 
-// export default combineReducers({
-//     card
-// })
+export default combineReducers({
+    card
+})
