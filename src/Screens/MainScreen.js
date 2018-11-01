@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Platform, Image , Text} from 'react-native';
 import Expo from 'expo';
+import Card from '../Components/Card'
 import { STATUS_BAR_HEIGHT } from '../constants';
 
 // const cacheImages = images => images.map(image => {
@@ -20,42 +21,42 @@ class MainScreen extends Component {
       color: 'white'
     },
     headerLeft: <Text> </Text>
-      
+    
     
   });
-
-//   state = {
-//     appIsReady: false
-//   }
-
-//   componentWillMount() {
-//     this._loadAssetsAsync();
-//   }
-
-//   async _loadAssetsAsync() {
-//     const imageAssets = cacheImages([icon]);
-//     await Promise.all([...imageAssets]);
-//     this.setState({ appIsReady: true });
-//   }
-
+  
+  state = {
+    appIsReady: false
+  }
+  
+  //   componentWillMount() {
+  //     this._loadAssetsAsync();
+  //   }
+  
+  //   async _loadAssetsAsync() {
+  //     const imageAssets = cacheImages([icon]);
+  //     await Promise.all([...imageAssets]);
+  //     this.setState({ appIsReady: true });
+  //   }
+  
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#ddd' }}>
-        {/* Chord Modal */}
-
-        {/* Content */}
+      {/* Chord Modal */}
+        <Card/>
+      {/* Content */}
       </View>
-    );
+      );
+    }
   }
-}
-
-const styles = {
-  imageStyle: {
-    marginTop: 20,
-    marginLeft: 10,
-    width: 40,
-    height: 40
-  }
-};
-
-export default MainScreen;
+  
+  const styles = {
+    imageStyle: {
+      marginTop: 20,
+      marginLeft: 10,
+      width: 40,
+      height: 40
+    }
+  };
+  
+  export default MainScreen;

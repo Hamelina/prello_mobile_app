@@ -13,6 +13,7 @@ const name = ( state = initCard.name, action ) => {
         case SET_CARD_NAME:
         return action.payload.name
         default:
+        
         return state;
     }
 }
@@ -22,8 +23,10 @@ const dueDate = ( state = initCard.dueDate, action ) => state
 
 const done = (state = initCard.done, action ) => {
     switch(action["type"]) {
+
         case SET_CHECK_CARD_STATE:
         return action.payload.state
+
         default:
         return state;
     }
