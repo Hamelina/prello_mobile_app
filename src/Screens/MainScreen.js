@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Platform, Image , Text} from 'react-native';
 import Expo from 'expo';
-import Card from '../Components/Card'
+import Cards from '../Components/Cards'
 import { STATUS_BAR_HEIGHT } from '../constants';
 
 // const cacheImages = images => images.map(image => {
@@ -43,7 +43,7 @@ class MainScreen extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#ddd' }}>
       {/* Chord Modal */}
-        <Card/>
+        <Cards/>
       {/* Content */}
       </View>
       );
