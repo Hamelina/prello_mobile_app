@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { View, Platform, Image , Text} from 'react-native';
-import Expo from 'expo';
 import Cards from '../Components/Cards'
+import  FilterButton  from '../Components/FilterButton';
+import CardSearchBar from '../Components/CardSearchBar';
+
+//Style
 import { STATUS_BAR_HEIGHT } from '../constants';
+import styles from '../Styles/Filter&SearchStyle'
 
 // const cacheImages = images => images.map(image => {
 //   if (typeof image === 'string') return Image.prefetch(image);
@@ -40,23 +44,20 @@ class MainScreen extends Component {
   //   }
   
   render() {
+    // const { navigate } = this.props.navigation;
     return (
-      <View style={{ flex: 1, backgroundColor: '#ddd' }}>
-      {/* Chord Modal */}
-        <Cards/>
-      {/* Content */}
+      <View style={{backgroundColor: '#ddd' }} id='mainView'>
+      
+      <View style={styles.row}>
+        <FilterButton style = {styles.buttonWrap}/>
+        {/* <CardSearchBar style= {styles.inputWrap}/> */}
+      </View>
+
+      <Cards/>
       </View>
       );
     }
   }
   
-  const styles = {
-    imageStyle: {
-      marginTop: 20,
-      marginLeft: 10,
-      width: 40,
-      height: 40
-    }
-  };
   
   export default MainScreen;

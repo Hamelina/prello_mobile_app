@@ -3,21 +3,23 @@ import { StyleSheet, Text, View } from 'react-native';
 import {Provider} from 'react-redux'; 
 import {createStackNavigator} from 'react-navigation' ;
 import store from './src/Store'; 
-import MainScreen from './src/Screens/MainScreen'
-//import Card from './src/Components/Card';
+import MainScreen from './src/Screens/MainScreen'; 
+import FilterScreen from './src/Screens/FilterScreen';
+
+const util = require('util');
 
 export default class App extends React.Component {
   render() {
     const MainNavigator = createStackNavigator ({
-      Main : {screen : MainScreen}
+      Main : {screen : MainScreen},
+      Filter : {screen : FilterScreen},
     });
 
+    //console.log("this props nav = " +util.inspect(this.props.navigation, false, null)); 
 
     return (
-      // <View style={styles.container}>
-      // <Text> hello World </Text>
-      // </View>
-
+    
+  
       <Provider store = {store}>  
         <MainNavigator/>
       </Provider>

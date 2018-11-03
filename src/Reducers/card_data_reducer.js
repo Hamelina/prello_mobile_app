@@ -1,3 +1,3 @@
-import data from './cards.json';
+import cardsFakeData from './cards.json';
 
-export default () => data;
+export default () => cardsFakeData;
