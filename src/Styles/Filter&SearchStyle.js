@@ -15,6 +15,11 @@ export default StyleSheet.create({
     },
     buttonWrap : {
         flex : 1,
-    }
+    }, 
+    filterScreen : {
+        marginTop: Dimensions.get("screen").height*0.18, 
+        marginRight: Dimensions.get("screen").height*0.1,
+        marginLeft: Dimensions.get("screen").height*0.1
+    },
     
 });

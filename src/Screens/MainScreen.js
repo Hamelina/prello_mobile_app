@@ -50,7 +50,7 @@ class MainScreen extends Component {
       
       <View style={styles.row}>
         <FilterButton style = {styles.buttonWrap}/>
-        {/* <CardSearchBar style= {styles.inputWrap}/> */}
+        <CardSearchBar style= {styles.inputWrap}/>
       </View>
 
       <Cards/>

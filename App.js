@@ -5,33 +5,37 @@ import {createStackNavigator} from 'react-navigation' ;
 import store from './src/Store'; 
 import MainScreen from './src/Screens/MainScreen'; 
 import FilterScreen from './src/Screens/FilterScreen';
+import BoardsFilterScreen from './src/Screens/BoardsFilterScreen';
+import ListsFilterScreen from './src/Screens/ListsFilterScreen';
+import LabelsFilterScreen from './src/Screens/LabelsFilterScreen';
+
+
 
 const util = require('util');
 
-export default class App extends React.Component {
-  render() {
-    const MainNavigator = createStackNavigator ({
-      Main : {screen : MainScreen},
-      Filter : {screen : FilterScreen},
-    });
 
-    //console.log("this props nav = " +util.inspect(this.props.navigation, false, null)); 
-
-    return (
+const RootStack = createStackNavigator(
+  {
+    Main : {screen : MainScreen},
+    Filter : {screen : FilterScreen},
+    BoardsFilter: {screen : BoardsFilterScreen},
+    ListsFilter: {screen : ListsFilterScreen},
+    LabelsFilter: {screen : LabelsFilterScreen}
     
-  
-      <Provider store = {store}>  
-        <MainNavigator/>
-      </Provider>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-});
+  {
+    initialRouteName: 'Main',
+  }
+  );
+  export default class App extends React.Component {
+    render() {
+      return (
+        <Provider store = {store}>
+        <RootStack />
+        </Provider>
+        );
+      }
+    }
+    
+    
+    

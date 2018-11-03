@@ -5,7 +5,7 @@ import { View , Text ,Platform,StyleSheet,Dimensions, ScrollView} from 'react-na
 import Carousel from 'react-native-snap-carousel';
 import { CardViewWithIcon } from "react-native-simple-card-view";
 import styles from "../Styles/CarousselStyle"; 
-import cardsFakeDate from "../Reducers/cards.json" ; 
+import cardsFakeDate from "../Data/cards.json" ; 
 //import {SCREEN_HEIGHT , SCREEN_WIDTH} from "../constants"
 
 
