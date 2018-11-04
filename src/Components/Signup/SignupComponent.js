@@ -11,8 +11,6 @@ class Signup extends Component {
             <KeyboardAvoidingView behavior="padding" style = {styles.container}>
             
             <View style= {styles.logoContainer}>
-                    
-
                     <Image
                     style={ styles.logo}
                     source = {require('../../../assets/logo1.png')}

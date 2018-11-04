@@ -4,9 +4,6 @@ import listsFakeData from "../../Data/lists.json" ;
 import { List, ListItem  } from 'react-native-elements';
 import styles from '../../Styles/Filter&SearchStyle'; 
 
-
-
-
 class ListsFilterComponent extends Component{
     
     constructor(props) {

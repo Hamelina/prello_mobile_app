@@ -1,8 +1,9 @@
 import React, {Component} from 'react'; 
 import { List, ListItem,  } from 'react-native-elements';
-import {Dimensions}from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import styles from '../Styles/Filter&SearchStyle'; 
+import DateComponent from '../Components/DateComponent';
+import { View } from 'native-base';
 
 
 class FilterScreen extends Component {
@@ -69,6 +70,9 @@ class FilterScreen extends Component {
             ]
             const { navigate } = this.props.navigation;
             return(
+                <React.Fragment>
+                <DateComponent/>
+
                 <List containerStyle={styles.filterScreen }>
                 {
                     filterBy.map((l) => (
@@ -80,7 +84,9 @@ class FilterScreen extends Component {
                         />
                         ))
                     }
-                    </List>
+                </List>
+                
+                </React.Fragment>
                     )}
                 }       
                 
