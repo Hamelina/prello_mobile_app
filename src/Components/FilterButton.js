@@ -27,4 +27,4 @@ class FilterButton extends Component{
             
         }
     }
-    export default withNavigation(FilterButton); 
+    export default withNavigation(FilterButton);

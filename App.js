@@ -8,7 +8,8 @@ import FilterScreen from './src/Screens/FilterScreen';
 import BoardsFilterScreen from './src/Screens/BoardsFilterScreen';
 import ListsFilterScreen from './src/Screens/ListsFilterScreen';
 import LabelsFilterScreen from './src/Screens/LabelsFilterScreen';
-
+import Login from './src/Components/Login/Login'
+import SignupComponent from './src/Components/Signup/SignupComponent'
 
 
 const util = require('util');
@@ -20,11 +21,15 @@ const RootStack = createStackNavigator(
     Filter : {screen : FilterScreen},
     BoardsFilter: {screen : BoardsFilterScreen},
     ListsFilter: {screen : ListsFilterScreen},
-    LabelsFilter: {screen : LabelsFilterScreen}
+    LabelsFilter: {screen : LabelsFilterScreen},
+    Login: {screen : Login},
+    Signup: {screen : SignupComponent}
+
+
     
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Login',
   }
   );
   export default class App extends React.Component {
