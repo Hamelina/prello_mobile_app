@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import {initFilter, ADD_ID_BOARD_TO_FILTER , REMOVE_ID_BOARD_FROM_FILTER} from '../Actions/FilterAction'; 
+import {initFilter, ADD_ID_BOARD_TO_FILTER , REMOVE_ID_BOARD_FROM_FILTER, 
+        ADD_ID_LIST_TO_FILTER, REMOVE_ID_LIST_FROM_FILTER} from '../Actions/FilterAction'; 
 
 
 const boardsFilter = ( state = initFilter.boardsFilter, action ) => {
@@ -14,7 +15,20 @@ const boardsFilter = ( state = initFilter.boardsFilter, action ) => {
         return state;
     }
 }
+const listsFilter = ( state = initFilter.listsFilter, action ) => {
+    switch(action["type"]) {
+        case ADD_ID_LIST_TO_FILTER:
+        return [...state , action.payload.idList ]
+        
+        case REMOVE_ID_LIST_FROM_FILTER:
+        return state.filter((idList) =>action.payload.idList != idList)
+
+        default:
+        return state;
+    }
+}
 export default combineReducers({
-    boardsFilter
+    boardsFilter,
+    listsFilter
 }
 )
