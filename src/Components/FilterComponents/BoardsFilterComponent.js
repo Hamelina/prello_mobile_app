@@ -1,9 +1,12 @@
 import React , {Component} from 'react';
+import { connect } from 'react-redux';
+import {FlatList} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import boardsFakeData from "../../Data/boards.json" ; 
-import { List, ListItem , CheckBox, View } from 'react-native-elements';
+import { ListItem , List, Text, CheckBox, View } from 'react-native-elements';
 import styles from '../../Styles/Filter&SearchStyle'; 
 import CustomCheckBoxComponent from './CustomCheckboxComponent';
+import {addBoardToFilter , removeBoardFromFilter} from '../../Actions/FilterAction'
 
 class BoardsFilterComponent extends Component{
     
@@ -14,55 +17,64 @@ class BoardsFilterComponent extends Component{
             checked: false,
             checkedItems: new Map()
         }
-        this.handleChange = this.handleChange.bind(this);
-        
     }
+    _keyExtractor = (item, index) => item.id;
     
-    handleChange(e) {
-        // console.log("in handlechange");
-        // const item = e.target.title;
-        // const isChecked = e.target.checked;
-        // this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
+    handleChange = (idboard, isIn) => {
+        console.log("in handlechange");
+        if( ! isIn){
+            this.props.addBoardToFilter( idboard);
+        }
+        else{
+            this.props.removeBoardFromFilter(idboard);
+
+        }
     }
     render(){
-        
+        const {boardsFilter} = this.props ;
+        console.log("boardssssFilter" + boardsFilter);
         return (
-            console.log("checked in board : " + this.state),
-            <List containerStyle={styles.filterScreen }>
-            {
-                boardsFakeData.map((l) => (
-                    
-                    
-                    <ListItem 
-                    hideChevron
-                    key={l.id}
-                    title={
-                        // <CheckBox
-                        // title={l.name}
-                        // onPress={() => {
-                        
-                        //     this.setState(() => ({
-                        //         filterByelements: filterByelements.concat(l.id) })
-                        //         );
-                        //     this.setState((state) => ({
-                        //         checked: !state.checked,
-                        //     }));
-                        //     console.log(l.id);
-                        //     console.log(this.state.filterByelements);
-                        // }}
-                        // checked= {this.state.checked}
-                        // />
-                        <CustomCheckBoxComponent id={l.id} title ={l.title} onChange={this.handleChange} />
-                        
-                    }
-                    
+            
+            <List style ={styles.component}>
+            <FlatList
+            data = {boardsFakeData}
+            keyExtractor={this._keyExtractor}
+            extraData={boardsFilter}
+            renderItem={({ item : board }) => (
+                <ListItem 
+                
+                hideChevron
+                key={board.id}
+
+                title={
+
+                    <CustomCheckBoxComponent id={board.id} title ={board.name} 
+                    handleChange={() =>this.handleChange(board.id, boardsFilter.includes(board.id) )} 
+                    checked ={boardsFilter.includes(board.id)}
                     />
                     
-                    ))
                 }
-                </List>
-                )
+                />                
                 
+                )}
+                
+                />
+                </List>
+                
+                )
             }
+            
         }
-        export default withNavigation(BoardsFilterComponent); 
+
+        const mapStateToProps = (state, props) => console.log(state) || ({
+            boardsFilter : state.filter.boardsFilter
+        })
+        
+        const mapDispatchToProps = (dispatch, props) => ({
+            addBoardToFilter: (idBoard) => dispatch(addBoardToFilter(idBoard)),
+            removeBoardFromFilter: (idBoard) => dispatch(removeBoardFromFilter(idBoard))
+
+        })
+
+
+export default withNavigation( connect(mapStateToProps, mapDispatchToProps)(BoardsFilterComponent)); 

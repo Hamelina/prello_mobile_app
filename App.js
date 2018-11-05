@@ -29,7 +29,7 @@ const RootStack = createStackNavigator(
     
   },
   {
-    initialRouteName: 'BoardsFilter',
+    initialRouteName: 'Main',
   }
   );
   export default class App extends React.Component {

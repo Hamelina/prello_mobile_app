@@ -6,6 +6,7 @@ import Carousel from 'react-native-snap-carousel';
 import { CardViewWithIcon } from "react-native-simple-card-view";
 import styles from "../Styles/CarousselStyle"; 
 import cardsFakeDate from "../Data/cards.json" ; 
+import { Divider , Card} from 'react-native-elements';
 //import {SCREEN_HEIGHT , SCREEN_WIDTH} from "../constants"
 
 
@@ -16,55 +17,65 @@ class Cards extends Component {
         this.state = { 
             loading: true, 
             searchTerm : '' };
-
-    }
-    
-    async componentWillMount() {
-        await Font.loadAsync({
-            Roboto: require("native-base/Fonts/Roboto.ttf"),
-            Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-        });
-    }
-    
-    _renderItem ({item, index}) {
-            
-        return (
-            <View style={styles.carousselItem}>
-                <Text >{ item.name }</Text>
-                <Text >{ item.desc }</Text>
-            </View>
-        );
-    }
-    
-    render() {
-        
-        
-        const screenwidth = Dimensions.get("window").width ;
-
-    
-            return(
-                <Carousel 
-                ref={(c) => { this._carousel = c; }}
-                data={cardsFakeDate}
-                renderItem={this._renderItem}
-                sliderWidth={screenwidth}
-                itemWidth={screenwidth*0.75}
-                />
-                )
-                
-            } 
             
         }
-        const mapStateToProps = (state, props) => ({
-            desc: state.card.desc,
-            state: state.card.state
-            // TODO: Add store state to the component props
-        })
         
-        const mapDispatchToProps = (dispatch, props) => ({
-            //setCheckCardState: (complete) => dispatch(setCheckCardState( props.id, complete ))
-            changeCardDesc: (event) => dispatch(changeCardDesc(props.id, event.target.value))
-            // TODO: Add 
-        })
+        async componentWillMount() {
+            await Font.loadAsync({
+                Roboto: require("native-base/Fonts/Roboto.ttf"),
+                Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+            });
+        }
         
-        export default connect(mapStateToProps, mapDispatchToProps)(Cards); 
+        _renderItem ({item, index}) {
+            
+            return (
+                <View style={styles.carousselItem}>
+                {/* <CheckBox/> */}
+                <Text style = {styles.cardTitle} >{ item.name }</Text>
+                <Text style = {styles.propreties} >Board : { item.idBoard }</Text>
+                <Text style = {styles.propreties}>List : { item.idList }</Text>
+                <Divider style={{ backgroundColor: '#000000' }} />
+                <ScrollView contentContainerStyle={styles.contentContainer}>
+                <Card style = {styles.cardForDesc}title="Description">
+                <Text style = {styles.cardDesc}> {item.desc}</Text>
+                </Card>
+                </ScrollView>
+                
+                </View>
+                );
+            }
+            
+            render() {
+                
+                
+                const screenwidth = Dimensions.get("window").width ;
+                
+                
+                return(
+                    <Carousel 
+                    ref={(c) => { this._carousel = c; }}
+                    data={this.props.cards}
+                    renderItem={this._renderItem}
+                    sliderWidth={screenwidth}
+                    itemWidth={screenwidth*0.75}
+                    />
+                    )
+                    
+                } 
+                
+            }
+            const mapStateToProps = (state, props) => ({
+                cards: state.cards,
+                name: state.cards.name,
+                state: state.cards.state
+                // TODO: Add store state to the component props
+            })
+            
+            const mapDispatchToProps = (dispatch, props) => ({
+                //setCheckCardState: (complete) => dispatch(setCheckCardState( props.id, complete ))
+                changeCardDesc: (event) => dispatch(changeCardDesc(props.id, event.target.value))
+                // TODO: Add 
+            })
+            
+            export default connect(mapStateToProps, mapDispatchToProps)(Cards); 

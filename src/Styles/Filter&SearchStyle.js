@@ -4,7 +4,7 @@ import {StyleSheet, Dimensions} from 'react-native';
 export default StyleSheet.create({
     row: {
         width : Dimensions.get("screen").width,
-        flexDirection: "row", 
+        //flexDirection: "row", 
     }, 
     inputWrap: {
         flex: 3,
@@ -17,9 +17,24 @@ export default StyleSheet.create({
         flex : 1,
     }, 
     filterScreen : {
-        marginTop: Dimensions.get("screen").height*0.18, 
-        marginRight: Dimensions.get("screen").height*0.1,
-        marginLeft: Dimensions.get("screen").height*0.1
+        marginTop: Dimensions.get("screen").height*0.1, 
     },
+    searchbar :{
+        minWidth : Dimensions.get("screen").width/2, 
+    }, 
+    Title : {
+        fontSize: 40 ,
+        paddingVertical: 20,
+        fontWeight: 'bold',
+        textAlign : "left", 
+        color : '#1D8ECE'
+
+    }, 
+    dateComponent :{
+        flex : 1, 
+        alignSelf: 'flex-end', 
+
+
+    }
     
 });

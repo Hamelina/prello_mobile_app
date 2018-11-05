@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import { List, ListItem,  } from 'react-native-elements';
+import { List, ListItem, Text } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import styles from '../Styles/Filter&SearchStyle'; 
 import DateComponent from '../Components/DateComponent';
@@ -71,12 +71,13 @@ class FilterScreen extends Component {
             const { navigate } = this.props.navigation;
             return(
                 <React.Fragment>
-                <DateComponent/>
-
+                <DateComponent style={styles.dateComponent}/>
+                <Text style={styles.Title}> Filter By</Text>
                 <List containerStyle={styles.filterScreen }>
                 {
                     filterBy.map((l) => (
                         <ListItem 
+                        hideChevron
                         key={l.key}
                         title={l.name}
                         onPress={() => this.onPress(l.key)}

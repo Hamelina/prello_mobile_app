@@ -10,7 +10,7 @@ export default class DateComponent extends Component{
 
         return(
             <View>
-                <Text>Today's date is : {day} {date} {month} {year}</Text>
+                <Text>Today's date is : {date} / {month} / {year}</Text>
             </View>
         )
     }

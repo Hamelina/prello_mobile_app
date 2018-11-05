@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import { connect } from 'react-redux'; 
 import { SearchBar } from 'react-native-elements';
+import styles from '../Styles/Filter&SearchStyle'
 
 class CardSearchBar extends Component{
   
@@ -13,7 +14,7 @@ class CardSearchBar extends Component{
   render(){
     return (
       
-      <SearchBar
+      <SearchBar style ={styles.searchBar}
       lightTheme = {true}
       //onChangeText={someMethod}
       //onClearText={someMethod}

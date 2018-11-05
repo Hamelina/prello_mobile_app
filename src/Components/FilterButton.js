@@ -10,7 +10,9 @@ class FilterButton extends Component{
         super(props);
     }
     
-
+    componentDidMount(props){
+        
+    }
     render(){
         const { navigate } = this.props.navigation;
 

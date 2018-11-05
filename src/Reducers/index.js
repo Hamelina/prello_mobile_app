@@ -1,6 +1,9 @@
 import {combineReducers} from 'redux'; 
-import card from './card_reducer'
+import cards from './cards_reducer'; 
+import initcard from '../Actions/actionCard'
+import filter from './filter_reducer';
 
 export default combineReducers({
-    card, 
+    cards, 
+    filter
 })
