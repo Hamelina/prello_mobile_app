@@ -22,7 +22,7 @@ export default StyleSheet.create({
     searchbar :{
         minWidth : Dimensions.get("screen").width/2, 
     }, 
-    Title : {
+    title : {
         fontSize: 40 ,
         paddingVertical: 20,
         fontWeight: 'bold',
@@ -33,8 +33,17 @@ export default StyleSheet.create({
     dateComponent :{
         flex : 1, 
         alignSelf: 'flex-end', 
-
-
+    }, 
+    component: {
+        height : Dimensions.get("screen").width/1.1,
+    }, 
+    nextButton : {
+        marginVertical : 20, 
+    }, 
+    logout : {
+        fontSize : 10, 
+        paddingRight : 10, 
+        fontWeight: 'bold'
     }
     
 });

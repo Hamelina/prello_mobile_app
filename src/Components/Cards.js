@@ -5,7 +5,6 @@ import { View , Text ,Platform,StyleSheet,Dimensions, ScrollView} from 'react-na
 import Carousel from 'react-native-snap-carousel';
 import { CardViewWithIcon } from "react-native-simple-card-view";
 import styles from "../Styles/CarousselStyle"; 
-import cardsFakeDate from "../Data/cards.json" ; 
 import { Divider , Card} from 'react-native-elements';
 //import {SCREEN_HEIGHT , SCREEN_WIDTH} from "../constants"
 
@@ -28,7 +27,8 @@ class Cards extends Component {
         }
         
         _renderItem ({item, index}) {
-            
+
+
             return (
                 <View style={styles.carousselItem}>
                 {/* <CheckBox/> */}
@@ -50,12 +50,12 @@ class Cards extends Component {
                 
                 
                 const screenwidth = Dimensions.get("window").width ;
-                
+             
                 
                 return(
                     <Carousel 
                     ref={(c) => { this._carousel = c; }}
-                    data={this.props.cards}
+                    data={this.props.cardsfiltered}
                     renderItem={this._renderItem}
                     sliderWidth={screenwidth}
                     itemWidth={screenwidth*0.75}
@@ -68,7 +68,8 @@ class Cards extends Component {
             const mapStateToProps = (state, props) => ({
                 cards: state.cards,
                 name: state.cards.name,
-                state: state.cards.state
+                state: state.cards.state,
+                cardsfiltered : props.cardsfiltered
                 // TODO: Add store state to the component props
             })
             

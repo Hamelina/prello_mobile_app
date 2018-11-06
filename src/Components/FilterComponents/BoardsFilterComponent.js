@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {FlatList} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import boardsFakeData from "../../Data/boards.json" ; 
-import { ListItem , List, Text, CheckBox, View } from 'react-native-elements';
+import { ListItem , List,Button,Icon ,Text, CheckBox, View } from 'react-native-elements';
 import styles from '../../Styles/Filter&SearchStyle'; 
 import CustomCheckBoxComponent from './CustomCheckboxComponent';
 import {addBoardToFilter , removeBoardFromFilter} from '../../Actions/FilterAction'
@@ -21,22 +21,21 @@ class BoardsFilterComponent extends Component{
     _keyExtractor = (item, index) => item.id;
     
     handleChange = (idboard, isIn) => {
-        console.log("in handlechange");
         if( ! isIn){
             this.props.addBoardToFilter( idboard);
         }
         else{
             this.props.removeBoardFromFilter(idboard);
-
+            
         }
     }
     render(){
         const {boardsFilter} = this.props ;
-        console.log("boardssssFilter" + boardsFilter);
+        console.disableYellowBox = true;
         return (
             
-            <List style ={styles.component}>
-            <FlatList
+            <List >
+            <FlatList style ={styles.component}
             data = {boardsFakeData}
             keyExtractor={this._keyExtractor}
             extraData={boardsFilter}
@@ -45,9 +44,9 @@ class BoardsFilterComponent extends Component{
                 
                 hideChevron
                 key={board.id}
-
+                
                 title={
-
+                    
                     <CustomCheckBoxComponent id={board.id} title ={board.name} 
                     handleChange={() =>this.handleChange(board.id, boardsFilter.includes(board.id) )} 
                     checked ={boardsFilter.includes(board.id)}
@@ -61,11 +60,12 @@ class BoardsFilterComponent extends Component{
                 />
                 </List>
                 
+                
                 )
             }
             
         }
-
+        
         const mapStateToProps = (state, props) => console.log(state) || ({
             boardsFilter : state.filter.boardsFilter
         })
@@ -73,8 +73,8 @@ class BoardsFilterComponent extends Component{
         const mapDispatchToProps = (dispatch, props) => ({
             addBoardToFilter: (idBoard) => dispatch(addBoardToFilter(idBoard)),
             removeBoardFromFilter: (idBoard) => dispatch(removeBoardFromFilter(idBoard))
-
+            
         })
-
-
-export default withNavigation( connect(mapStateToProps, mapDispatchToProps)(BoardsFilterComponent)); 
+        
+        
+        export default withNavigation( connect(mapStateToProps, mapDispatchToProps)(BoardsFilterComponent)); 

@@ -4,7 +4,8 @@ import data from '../Data/cards.json'  ;
 
 const store = createStore(reducers ,
     {
-        "cards" : data
+        "cards" : data, 
+        
     } ); 
 
 export default store ; 

@@ -72,7 +72,7 @@ class FilterScreen extends Component {
             return(
                 <React.Fragment>
                 <DateComponent style={styles.dateComponent}/>
-                <Text style={styles.Title}> Filter By</Text>
+                <Text style={styles.title}> Filter By</Text>
                 <List containerStyle={styles.filterScreen }>
                 {
                     filterBy.map((l) => (

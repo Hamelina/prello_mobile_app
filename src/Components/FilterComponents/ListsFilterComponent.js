@@ -1,9 +1,12 @@
 import React , {Component} from 'react';
 import {FlatList} from 'react-native';
+import { connect} from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import listsFakeData from "../../Data/lists.json" ; 
 import { List, ListItem  } from 'react-native-elements';
 import styles from '../../Styles/Filter&SearchStyle'; 
+import CustomCheckBoxComponent from './CustomCheckboxComponent';
+
 import {addListToFilter , removeListFromFilter} from '../../Actions/FilterAction'
 
 class ListsFilterComponent extends Component{
@@ -19,7 +22,6 @@ class ListsFilterComponent extends Component{
     _keyExtractor = (item, index) => item.id;
     
     handleChange = (idList, isIn) => {
-        console.log("in handlechange");
         if( ! isIn){
             this.props.addListToFilter( idList);
         }
@@ -30,25 +32,48 @@ class ListsFilterComponent extends Component{
     }
 
     render(){
-        const { navigate } = this.props.navigation;
-        
+        const {listsFilter} = this.props ;
         return (
-            <List containerStyle={styles.filterScreen }>
+            
+            <List style ={styles.component}>
             <FlatList
             data = {listsFakeData}
             keyExtractor={this._keyExtractor}
-            renderItem={({ item : l }) => (
+            extraData={listsFilter}
+            renderItem={({ item : list }) => (
                 <ListItem 
-                key={l.id}
-                title={l.name}
-                onPress={() => this.onPress(l.key)}
                 
-                />
+                hideChevron
+                key={list.id}
+
+                title={
+
+                    <CustomCheckBoxComponent id={list.id} title ={list.name} 
+                    handleChange={() =>this.handleChange(list.id, listsFilter.includes(list.id) )} 
+                    checked ={listsFilter.includes(list.id)}
+                    />
+                    
+                } 
+                />                
+                
                 )}
+                
                 />
                 </List>
-                )
                 
+                )
             }
+            
         }
-        export default withNavigation(ListsFilterComponent); 
+
+        const mapStateToProps = (state, props) => console.log(state) || ({
+            listsFilter : state.filter.listsFilter
+        })
+        
+        const mapDispatchToProps = (dispatch, props) => ({
+            addListToFilter: (idList) => dispatch(addListToFilter(idList)),
+            removeListFromFilter: (idList) => dispatch(removeListFromFilter(idList))
+
+        })
+
+        export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(ListsFilterComponent)); 

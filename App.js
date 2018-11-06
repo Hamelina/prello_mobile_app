@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppRegistry } from 'react-native';
 import {Provider} from 'react-redux'; 
 import {createStackNavigator} from 'react-navigation' ;
 import store from './src/Store'; 
@@ -8,15 +8,15 @@ import FilterScreen from './src/Screens/FilterScreen';
 import BoardsFilterScreen from './src/Screens/BoardsFilterScreen';
 import ListsFilterScreen from './src/Screens/ListsFilterScreen';
 import LabelsFilterScreen from './src/Screens/LabelsFilterScreen';
-import Login from './src/Components/Login/Login'
-import SignupComponent from './src/Components/Signup/SignupComponent'
+import Login from './src/Components/Login/Login'; 
+import SignupComponent from './src/Components/Signup/SignupComponent'; 
+import Application from './src/Components/ApplicationComponent'; 
 
-
-const util = require('util');
 
 
 const RootStack = createStackNavigator(
   {
+    Application : {screen : Application}, 
     Main : {screen : MainScreen},
     Filter : {screen : FilterScreen},
     BoardsFilter: {screen : BoardsFilterScreen},
@@ -24,9 +24,6 @@ const RootStack = createStackNavigator(
     LabelsFilter: {screen : LabelsFilterScreen},
     Login: {screen : Login},
     Signup: {screen : SignupComponent}
-
-
-    
   },
   {
     initialRouteName: 'Main',
@@ -42,5 +39,5 @@ const RootStack = createStackNavigator(
       }
     }
     
-    
-    
+    AppRegistry.registerComponent('App', () => App);  
+  

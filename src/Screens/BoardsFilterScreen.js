@@ -1,18 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {withNavigation} from 'react-navigation'; 
+import { StyleSheet, Text, View, Button, Icon } from 'react-native';
 import BoardsFilterComponent from '../Components/FilterComponents/BoardsFilterComponent';
 import styles from '../Styles/Filter&SearchStyle'
 
 
 class BoardsFilterScreen extends React.Component {
+
     render() {
+        const { navigate } = this.props.navigation
+
         return (
             <View>
-            <Text style ={styles.Title}>Filter By Boards</Text>
+            <Text style ={styles.title}>Filter By Boards</Text>
             <BoardsFilterComponent/>
+
+            <Button
+            style ={styles.nextButton}
+                icon={
+                    <Icon
+                    name='arrow-right'
+                    size={15}
+                    color='white'
+                    />
+                }
+                title='Next'
+                onPress={() =>
+                    navigate('Filter')
+                }            />
+
+            
             </View>
             );
         }
     }
-    export default BoardsFilterScreen;    
+    export default withNavigation(BoardsFilterScreen);
     
