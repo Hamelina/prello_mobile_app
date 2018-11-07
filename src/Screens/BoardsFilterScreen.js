@@ -9,6 +9,8 @@ class BoardsFilterScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation
+        console.log("BoardfilterScreen props" , this.props );
+        console.log("BoardfilterScreen state" , this.state );
 
         return (
             <View>
@@ -17,16 +19,12 @@ class BoardsFilterScreen extends React.Component {
 
             <Button
             style ={styles.nextButton}
-                icon={
-                    <Icon
-                    name='arrow-right'
-                    size={15}
-                    color='white'
-                    />
-                }
+                
                 title='Next'
                 onPress={() =>
-                    navigate('Filter')
+                    navigate('Filter',{
+                        filter : this.props.filter ,
+                    })
                 }            />
 
             

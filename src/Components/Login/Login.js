@@ -3,10 +3,14 @@ import {View , Image, KeyboardAvoidingView, ImageBackground,TouchableOpacity, Te
 import LoginInput from './LoginInput'; 
 import styles from '../../Styles/LoginStyle';
 import { withNavigation } from 'react-navigation';
-
+// http
+import { GOOGLE_CLIENT } from '../../config.json';
+import { logIn } from '../../Request/login';
 
 
 class Login extends Component {
+
+    
     render(){
         return(
             <KeyboardAvoidingView behavior="padding" style = {styles.container}>

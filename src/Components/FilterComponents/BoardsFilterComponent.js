@@ -32,6 +32,9 @@ class BoardsFilterComponent extends Component{
     render(){
         const {boardsFilter} = this.props ;
         console.disableYellowBox = true;
+        console.log("BoardfilterScreenComponent" , this.props );
+        console.log("BoardfilterScreenComponent" , this.state );
+
         return (
             
             <List >
@@ -66,7 +69,7 @@ class BoardsFilterComponent extends Component{
             
         }
         
-        const mapStateToProps = (state, props) => console.log(state) || ({
+        const mapStateToProps = (state, props) => console.log("board filter component" , state) || ({
             boardsFilter : state.filter.boardsFilter
         })
         

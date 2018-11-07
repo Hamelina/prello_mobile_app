@@ -1,17 +1,30 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {withNavigation} from 'react-navigation'; 
+import { Text, View, Button } from 'react-native';
 import ListsFilterComponent from '../Components/FilterComponents/ListsFilterComponent';
+import styles from '../Styles/Filter&SearchStyle'
 
 
 class ListsFilterScreen extends React.Component {
     render() {
         return (
             <View>
-            <Text>Lists</Text>
+            <Text style ={styles.title}>Filter By Lists</Text>
             <ListsFilterComponent/>
+            <Button
+            style ={styles.nextButton}
+                
+                title='Next'
+                onPress={() =>
+                    this.props.navigation.navigate('Filter',{
+                        filter : this.props.filter ,
+                    })
+                }            />
+
+            
             </View>
             );
         }
     }
-    export default ListsFilterScreen;    
+    export default ListsFilterScreen; 
     

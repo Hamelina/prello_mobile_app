@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import { Button } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
-
+import{FilterScreen} from '../Screens/FilterScreen'
 
 class FilterButton extends Component{
     
@@ -23,6 +23,7 @@ class FilterButton extends Component{
             title='Filter'
             onPress={() =>
                 navigate('Filter')
+                
             }
             />
             )

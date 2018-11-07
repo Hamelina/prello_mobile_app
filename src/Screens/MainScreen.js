@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Platform, Image , Text} from 'react-native';
-import Cards from '../Components/Cards'
+import Cards from '../Components/Cards';
+import {connect} from 'react-redux';
 import  FilterButton  from '../Components/FilterButton';
 import CardSearchBar from '../Components/CardSearchBar';
 import SearchInput, { createFilter } from 'react-native-search-filter';
@@ -20,7 +21,8 @@ class MainScreen extends Component {
     super(props);
     this.state = {
       searchTerm: '', 
-      appIsReady: false
+      appIsReady: false,
+      filter : this.props.navigation.getParam('filter', 'nonononono')
 
     }
   }
@@ -84,6 +86,8 @@ class MainScreen extends Component {
       );
     }
   }
+  const mapStateToProps = (state, props) => console.log("filterScreen",state) || ({
+    listsFilter : state.filter.listsFilter
+})
   
-  
-  export default MainScreen;
+  export default connect(mapStateToProps)(MainScreen);

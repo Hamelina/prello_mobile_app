@@ -28,7 +28,7 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         textAlign : "left", 
         color : '#1D8ECE'
-
+        
     }, 
     dateComponent :{
         flex : 1, 
@@ -39,6 +39,9 @@ export default StyleSheet.create({
     }, 
     nextButton : {
         marginVertical : 20, 
+        position: 'absolute',
+        bottom:0,
+        left:0,
     }, 
     logout : {
         fontSize : 10, 
