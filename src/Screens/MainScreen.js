@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform, Image , Text} from 'react-native';
+import { View, Platform, Image , Text, Button} from 'react-native';
 import Cards from '../Components/Cards';
 import {connect} from 'react-redux';
 import  FilterButton  from '../Components/FilterButton';
@@ -33,20 +33,20 @@ class MainScreen extends Component {
   }
 
 
-  static navigationOptions = () => ({
-    title: 'Prello',
-    headerStyle: {
-      height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
-      backgroundColor: '#2196F3'
-    },
-    headerTitleStyle: {
-      marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
-      color: 'white'
-    },
-    headerRight: <Text style = {styles.logout}> Logout</Text>
+  // static navigationOptions = () => ({
+  //   title: 'Prello',
+  //   headerStyle: {
+  //     height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
+  //     backgroundColor: '#2196F3'
+  //   },
+  //   headerTitleStyle: {
+  //     marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
+  //     color: 'white'
+  //   },
+  //   headerRight: <Text style = {styles.logout}> Logout</Text>
     
     
-  });
+  // });
   
   
   //   componentWillMount() {

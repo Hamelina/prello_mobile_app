@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Stylesheet , Text, View , Image, TextInput, TouchableOpacity} from 'react-native'; 
 import styles from '../../Styles/LoginInputStyle'
 import { withNavigation } from 'react-navigation';
-import { logIn } from '../../Request/login';
+
 
 class LoginInput extends Component {
     
@@ -12,7 +12,7 @@ class LoginInput extends Component {
         const id = this.idInput;
         
         //let reg = /^[\w\-\+]+(\.[\w\-]+)*@[\w\-]+(\.[\w\-]+)*\.[\w\-]{2,4}$/;
-        let cleanId  = true ; //id.replace(/(^\s*)|(\s*$)/g, "");
+        let cleanId  = id.replace(/(^\s*)|(\s*$)/g, "");
         let cleanPassword = true; 
         
         // console.log(reg.test(id)); 
@@ -32,7 +32,7 @@ class LoginInput extends Component {
         
         //const cleanPassword = password && password.replace(/(^\s*)|(\s*$)/g, "")
         //const cleanId = id && id.replace(/(^\s*)|(\s*$)/g, "");
-        console.log(this.state)
+        
         if (cleanPassword && cleanId) {
             const { navigate } = this.props.navigation;
             logIn(id, password);
@@ -56,13 +56,11 @@ class LoginInput extends Component {
         
     }
     render(){
-        this.passwordInput = React.createRef();
-        this.idInput = React.createRef();
         
         return(
             <View style= {styles.container}>
             <TextInput
-            ref = {this.passwordInput}
+            ref = "idInput"
             placeholder = "Enter Your Email Address"
             placeholderTextColor = "rgba(255,255,255,0.8)"
             returnKeyType = "next"

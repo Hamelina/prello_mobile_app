@@ -1,6 +1,6 @@
 import client from './client'
 
-const fetchCardsWithFilter = (dueDate,filterBoards , filterLists , filterTags ) => {
+export const fetchCardsWithFilter = (dueDate,filterBoards , filterLists , filterTags ) => {
     const filterBoardJoin = filterBoards.join(",")
     const filterListJoin = filterLists.join(",") 
     const filterTagJoin = filterTags.join(",") 
@@ -10,3 +10,11 @@ const fetchCardsWithFilter = (dueDate,filterBoards , filterLists , filterTags ) 
     )
 
 } 
+
+
+export const fetchCards = (idCard) =>  {
+    console.log(idCard);
+    return client.get(`/api/board/${idCard}`)
+    .then(response => response.data)
+    .catch(err => console.log(err))
+  }

@@ -6,6 +6,13 @@ export default StyleSheet.create({
         width : Dimensions.get("screen").width,
         //flexDirection: "row", 
     }, 
+    sameRow:{
+        flex: 1,
+        flexDirection:"row",
+    },
+    inputrap:{
+        flex : 1
+    },
     inputWrap: {
         flex: 3,
         borderColor: "#cccccc",

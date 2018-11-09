@@ -5,8 +5,10 @@ import { withNavigation } from 'react-navigation';
 import boardsFakeData from "../../Data/boards.json" ; 
 import { ListItem , List,Button,Icon ,Text, CheckBox, View } from 'react-native-elements';
 import styles from '../../Styles/Filter&SearchStyle'; 
-import CustomCheckBoxComponent from './CustomCheckboxComponent';
+import CustomColapsableCheckBoxComponent from './CustomColapsableCheckBoxComponent';
 import {addBoardToFilter , removeBoardFromFilter} from '../../Actions/FilterAction'
+//import {AccordionList} from "accordion-collapse-react-native";
+
 
 class BoardsFilterComponent extends Component{
     
@@ -29,6 +31,8 @@ class BoardsFilterComponent extends Component{
             
         }
     }
+
+    
     render(){
         const {boardsFilter} = this.props ;
         console.disableYellowBox = true;
@@ -50,7 +54,7 @@ class BoardsFilterComponent extends Component{
                 
                 title={
                     
-                    <CustomCheckBoxComponent id={board.id} title ={board.name} 
+                    <CustomColapsableCheckBoxComponent id={board.id} title ={board.name} 
                     handleChange={() =>this.handleChange(board.id, boardsFilter.includes(board.id) )} 
                     checked ={boardsFilter.includes(board.id)}
                     />

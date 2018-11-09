@@ -7,6 +7,9 @@ import { CardViewWithIcon } from "react-native-simple-card-view";
 import styles from "../Styles/CarousselStyle"; 
 import { Divider , Card} from 'react-native-elements';
 import client from '../Request/client'; 
+
+import {fetchCards} from '../Request/cards'
+
 //import {SCREEN_HEIGHT , SCREEN_WIDTH} from "../constants"
 
 
@@ -26,7 +29,11 @@ class Cards extends Component {
             Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
         });
 
-        //client.get(); 
+        fetchBoard(this.state.cardId)
+        .then(card => {
+          this.props.dispatchSetBoard(card)
+         })
+        .catch(err => console.error(err));
     }
     
 
@@ -80,6 +87,8 @@ class Cards extends Component {
         })
         
         const mapDispatchToProps = (dispatch, props) => ({
+            dispatchSetCard : (card) => dispatch(setCard(card)),
+
             changeCardDesc: (event) => dispatch(changeCardDesc(props.id, event.target.value)),
             filterCardsWithFilters: (event) => dispatch(filterCardsWithFilters(props.cardsfiltered, event.target))
         })
