@@ -5,7 +5,7 @@ import { View , Text ,Platform,StyleSheet,Dimensions, ScrollView} from 'react-na
 import Carousel from 'react-native-snap-carousel';
 import { CardViewWithIcon } from "react-native-simple-card-view";
 import styles from "../Styles/CarousselStyle"; 
-import { Divider , Card} from 'react-native-elements';
+import { Divider , Card, CheckBox} from 'react-native-elements';
 import client from '../Request/client'; 
 
 import {fetchCards} from '../Request/cards'
@@ -19,6 +19,7 @@ class Cards extends Component {
         super(props);
         this.state = {
             //filter : this.props.navigation.getParam('filter', [])
+            
         }
         
     }
@@ -28,24 +29,37 @@ class Cards extends Component {
             Roboto: require("native-base/Fonts/Roboto.ttf"),
             Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
         });
-
+        
         fetchBoard(this.state.cardId)
         .then(card => {
-          this.props.dispatchSetBoard(card)
-         })
+            this.props.dispatchSetBoard(card)
+        })
         .catch(err => console.error(err));
     }
     
-
+    
     _renderItem ({item, index}) {
         
-        
+        console.log("item " , item)
         return (
             <View style={styles.carousselItem}>
-            {/* <CheckBox/> */}
+            
             <Text style = {styles.cardTitle} >{ item.name }</Text>
-            <Text style = {styles.propreties} >Board : { item.idBoard }</Text>
+            
+            <View styles = {styles.cardCheckView}>
+            
+            {/* <Text style = {styles.propreties} >Board : { item.idBoard }</Text> */}
             <Text style = {styles.propreties}>List : { item.idList }</Text>
+            <CheckBox style = {styles.checkbox}
+            center
+            title='Done'
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            checked={false}
+            onPress={() => this.setState({checked: !this.state.checked})}
+            />
+            </View>
+            
             <Divider style={{ backgroundColor: '#000000' }} />
             <ScrollView contentContainerStyle={styles.contentContainer}>
             <Card style = {styles.cardForDesc}title="Description">
@@ -63,7 +77,7 @@ class Cards extends Component {
             const screenwidth = Dimensions.get("window").width ;
             
             console.log("props " , this.props);
-
+            
             return(
                 <Carousel 
                 ref={(c) => { this._carousel = c; }}
@@ -82,13 +96,14 @@ class Cards extends Component {
             cardsfiltered : props.cardsfiltered, 
             filter : props.filter,
             filterscreen : state.filter, 
-            listsFilter : state.filter.listsFilter
-
+            listsFilter : state.filter.listsFilter,
+            checked : false
+            
         })
         
         const mapDispatchToProps = (dispatch, props) => ({
             dispatchSetCard : (card) => dispatch(setCard(card)),
-
+            
             changeCardDesc: (event) => dispatch(changeCardDesc(props.id, event.target.value)),
             filterCardsWithFilters: (event) => dispatch(filterCardsWithFilters(props.cardsfiltered, event.target))
         })

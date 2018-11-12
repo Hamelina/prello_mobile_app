@@ -19,6 +19,7 @@
     "react-native-cardview": "^2.0.2",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
+    "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-search-filter": "^0.1.4",
     "react-native-simple-card-view": "^0.3.0",
     "react-native-snap-carousel": "^3.7.5",

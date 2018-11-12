@@ -38,6 +38,13 @@ export default StyleSheet.create({
     cardForDesc : {
         height : Dimensions.get("screen").height/2.5 ,
 
+    }, 
+    checkbox : {
+        alignSelf : "flex-end"
+    },
+    cardCheckView : {
+        flex : 1, 
+        flexDirection : 'column'
     }
 
     });

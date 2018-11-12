@@ -4,116 +4,122 @@ import DatePicker from 'react-native-datepicker';
 import { connect} from 'react-redux';
 import styles from '../Styles/Filter&SearchStyle'; 
 import DateComponent from '../Components/DateComponent';
-import { View } from 'native-base';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import {addDateToFilter , removeDatesFromFilter} from '../Actions/FilterAction'
+
 
 
 class FilterScreen extends Component {
     
+    state = {
+        isDateTimePickerVisible: false,
+    };
+    
+    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+    _handleDatePicked = (date) => {
+        console.log('A date has been picked: ', date);
+        this.props.removeDatesFromFilter()
+        this.props.addDateToFilter(date); 
+        this._hideDateTimePicker();
+    };
+    
     onPress = (key) =>{
         const { navigate } = this.props.navigation;
-        console.log("filterScreen props " , this.props );
-        console.log("filterScreen state " , this.state );
+        console.log("pressed,,,"+ this.props.state );
 
+        
         switch(key){
             case 2 : 
             return (
                 navigate('BoardsFilter')
                 )
-            case 3 : 
-            return (
-                navigate('ListsFilter')
-            )
-            case 4 : 
-            return (
-                navigate('LabelsFilter')
-            )
-            case 1 :
-                <DatePicker
-                style={{width: 200}}
-                
-                mode="date"
-                placeholder="select date"
-                format="YYYY-MM-DD"
-                minDate="2016-05-01"
-                maxDate="2016-06-01"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                    dateIcon: {
-                        position: 'absolute',
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0
-                    },
-                    dateInput: {
-                        marginLeft: 36
-                    }
-                    // ... You can check the source to find the other keys.
-                }}
-                onDateChange={(date) => {this.setState({date: date})}}
-                />
-            }
-        }
-        
-        async openAndroidDatePicker() {
-            try {
-                const {action, year, month, day} = await DatePickerAndroid.open({
-                    date: new Date()
-                });
-            } catch ({code, message}) {
-                console.warn('Cannot open date picker', message);
-            }
-        }
-        render(){
-            console.log("filterScreen" , this.props );
-            console.log("filterScreen state" , this.state );
-
-            const filterBy = [
-                {key : 1 , name : 'Due Day'}, 
-                {key : 2 ,name : 'Board' }, 
-                {key : 3 ,name : 'List'}, 
-                {key : 4 ,name : 'Tag'},
-            ]
-            const { navigate } = this.props.navigation;
-            return(
-                <React.Fragment>
-                <DateComponent style={styles.dateComponent}/>
-                <Text style={styles.title}> Filter By</Text>
-                <List containerStyle={styles.filterScreen }>
-                {
-                    filterBy.map((l) => (
-                        <ListItem 
-                        hideChevron
-                        key={l.key}
-                        title={l.name}
-                        onPress={() => this.onPress(l.key)}
+                case 3 : 
+                return (
+                    navigate('ListsFilter')
+                    )
+                    case 4 : 
+                    return (
+                        navigate('LabelsFilter')
+                        )
+                        case 1 :
                         
-                        />
-                        ))
+                        this._showDateTimePicker();
+                        
                     }
-                </List>
-                <Button
-                style ={styles.nextButton}
-                icon={
-                    <Icon
-                    name='arrow-right'
-                    size={15}
-                    color='white'
-                    />
                 }
-                title='Done'
-                onPress={() =>
+                
+                async openAndroidDatePicker() {
+                    try {
+                        const {action, year, month, day} = await DatePickerAndroid.open({
+                            date: new Date()
+                        });
+                    } catch ({code, message}) {
+                        console.warn('Cannot open date picker', message);
+                    }
+                }
+                render(){
                     
-                    navigate('Main', {
-                        filter : this.props.filter ,
-                    })
-                }            />
-                
-                </React.Fragment>
-                    )}
-                }       
-                const mapStateToProps = (state, props) => console.log("filterScreen",state) || ({
-                    listsFilter : state.filter.listsFilter
-                })
-                
-                export default connect(mapStateToProps)(FilterScreen); 
+
+                    const filterBy = [
+                        {key : 1 , name : 'Due Day'}, 
+                        {key : 2 ,name : 'Board' }, 
+                        {key : 3 ,name : 'List'}, 
+                        {key : 4 ,name : 'Tag'},
+                    ]
+                    const { navigate } = this.props.navigation;
+                    return(
+                        
+                        <React.Fragment>
+                        <DateComponent style={styles.dateComponent}/>
+                        <Text style={styles.title}> Filter By</Text>
+                        <List containerStyle={styles.filterScreen }>
+                        {
+                            filterBy.map((l) => (
+                                <ListItem 
+                                hideChevron
+                                key={l.key}
+                                title={l.name}
+                                onPress={() => this.onPress(l.key)}
+                                
+                                />
+                                ))
+                            }
+                            </List>
+                            <Button
+                            style ={styles.nextButton}
+                            icon={
+                                <Icon
+                                name='arrow-right'
+                                size={15}
+                                color='white'
+                                />
+                            }
+                            title='Done'
+                            onPress={() =>
+                                
+                                navigate('Main', {
+                                    filter : this.props.filter ,
+                                })
+                            }            />
+                            <DateTimePicker
+                        isVisible={this.state.isDateTimePickerVisible}
+                        onConfirm={this._handleDatePicked}
+                        onCancel={this._hideDateTimePicker}
+                        />
+                            </React.Fragment>
+                            )}
+                        }       
+                        const mapStateToProps = (state, props) => console.log("filterScreen",state) || ({
+                            
+                            listsFilter : state.filter.listsFilter, 
+                            dateFilter : state.filter.listsFilter.dateFilter
+                        })
+                        
+                        const mapDispatchToProps = (dispatch, props) => ({
+                            addDateToFilter: (idDate) => dispatch(addDateToFilter(idDate)),
+                            removeDatesFromFilter: () => dispatch(removeDatesFromFilter())
+                            
+                        })
+                        
+                        export default connect(mapStateToProps, mapDispatchToProps)(FilterScreen); 

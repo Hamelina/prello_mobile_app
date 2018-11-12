@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import {initFilter, ADD_ID_BOARD_TO_FILTER , REMOVE_ID_BOARD_FROM_FILTER, 
         ADD_ID_LIST_TO_FILTER, REMOVE_ID_LIST_FROM_FILTER, 
-        ADD_ID_LABEL_TO_FILTER, REMOVE_ID_LABEL_FROM_FILTER } from '../Actions/FilterAction'; 
+        ADD_ID_LABEL_TO_FILTER, REMOVE_ID_LABEL_FROM_FILTER, 
+        ADD_DATE_TO_FILTER , REMOVE_DATES_FROM_FILTER} from '../Actions/FilterAction'; 
 
 
 const boardsFilter = ( state = initFilter.boardsFilter, action ) => {
@@ -42,9 +43,23 @@ const labelsFilter = (state = initFilter.labelsFilter , action ) =>{
         return state;
     }
 }
+
+const dateFilter = (state = initFilter.dateFilter , action ) =>{
+    switch(action["type"]){
+        case ADD_DATE_TO_FILTER:
+        return [...state , action.payload.idDate]
+
+        case REMOVE_DATES_FROM_FILTER: 
+        return []
+        
+        default:
+        return state;
+    }
+}
 export default combineReducers({
     boardsFilter,
     listsFilter, 
-    labelsFilter
+    labelsFilter, 
+    dateFilter
 }
 )
