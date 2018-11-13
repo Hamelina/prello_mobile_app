@@ -8,7 +8,7 @@ export default StyleSheet.create({
                 borderRadius : 20,
                 shadowRadius : 20,
                 shadowOpacity : 12, 
-                shadowColor : '#000000', 
+                //shadowColor : '#000000', 
                
             },
     
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     },
     cardTitle : {
         fontSize: 40 ,
-        paddingVertical: 20,
+        paddingVertical: 10,
         fontWeight: 'bold',
         textAlign : "center", 
         color : '#1D8ECE'

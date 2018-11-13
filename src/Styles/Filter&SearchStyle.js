@@ -15,7 +15,7 @@ export default StyleSheet.create({
     },
     inputWrap: {
         flex: 3,
-        borderColor: "#cccccc",
+        borderColor: "red",
         borderBottomWidth: 1,
         marginBottom: 10, 
         minWidth : Dimensions.get("window").width*0.5
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     dateComponent :{
         flex : 1, 
         alignSelf: 'flex-end', 
-    }, 
+    },
     component: {
         height : Dimensions.get("screen").width/1.1,
     }, 

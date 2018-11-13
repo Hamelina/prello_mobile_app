@@ -23,16 +23,16 @@ class MainScreen extends Component {
       searchTerm: '', 
       appIsReady: false,
       filter : this.props.navigation.getParam('filter', 'nonononono')
-
+      
     }
   }
   searchUpdated(term) {
     console.log("in search updated"), 
-
+    
     this.setState({ searchTerm: term })
   }
-
-
+  
+  
   // static navigationOptions = () => ({
   //   title: 'Prello',
   //   headerStyle: {
@@ -44,8 +44,8 @@ class MainScreen extends Component {
   //     color: 'white'
   //   },
   //   headerRight: <Text style = {styles.logout}> Logout</Text>
-    
-    
+  
+  
   // });
   
   
@@ -61,33 +61,35 @@ class MainScreen extends Component {
   
   render() {
     console.disableYellowBox = true;
-     const KEYS_TO_FILTERS = ['item.name', 'card.desc'];
-     //filter((idList) =>action.payload.idList != idList)
-     console.log(this.state)
-     const filteredCards = cardsFakeData.filter(
-            (card)=> (card.name.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) >=0) ||
-            card.desc.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) >=0)   
-     filteredCards.map(l => console.log("inmap"+l.name))
-     console.log("filteredcards" , filteredCards)
-
-    return (
-      console.log(this.state.searchTerm), 
-      <View style={{backgroundColor: '#ddd' }} id='mainView'>
+    const KEYS_TO_FILTERS = ['item.name', 'card.desc'];
+    //filter((idList) =>action.payload.idList != idList)
+    console.log(this.state)
+    const filteredCards = cardsFakeData.filter(
+      (card)=> (card.name.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) >=0) ||
+      card.desc.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) >=0)   
+      filteredCards.map(l => console.log("inmap"+l.name))
+      console.log("filteredcards" , filteredCards)
       
+      return (
+        console.log(this.state.searchTerm), 
+        <View  id='mainView'>
+        
         <FilterButton style = {styles.buttonWrap}/>
-         <SearchInput 
-          onChangeText={(term) => { this.searchUpdated(term) }} 
-          // style={styles.searchInput}
-          placeholder="Type a message to search"
-          />  
+        <SearchInput 
+        onChangeText={(term) => { this.searchUpdated(term) }} 
+        // style={styles.searchInput}
+        placeholder="Type a message to search"
+        />  
         {/* <CardSearchBar style= {styles.inputWrap} /> */}
-      <Cards cardsfiltered={filteredCards} />
-      </View>
-      );
+        <Cards cardsfiltered={filteredCards} />
+        
+        </View>
+        );
+      }
     }
-  }
-  const mapStateToProps = (state, props) => console.log("filterScreen",state) || ({
-    listsFilter : state.filter.listsFilter
-})
-  
-  export default connect(mapStateToProps)(MainScreen);
+    const mapStateToProps = (state, props) => console.log("filterScreen",state) || ({
+      listsFilter : state.filter.listsFilter
+    })
+    
+    export default connect(mapStateToProps)(MainScreen);
+    

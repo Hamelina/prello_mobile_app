@@ -5,7 +5,7 @@
         "idBoard": "1",
         "idList": "2",
         "dueDate": "Date",
-        "done": "doing" ,
+        "done": "done" ,
         "desc": "This is card 1 of board 1 X"
     },
     {
@@ -23,7 +23,7 @@
         "idBoard": "1",
         "idList": "2",
         "dueDate": "Date",
-        "done": "doing" ,
+        "done": "done" ,
         "desc": "This is card 3 of board 1"
     }, 
     {

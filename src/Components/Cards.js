@@ -9,6 +9,8 @@ import { Divider , Card, CheckBox} from 'react-native-elements';
 import client from '../Request/client'; 
 
 import {fetchCards} from '../Request/cards'
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Remote debugger']);
 
 //import {SCREEN_HEIGHT , SCREEN_WIDTH} from "../constants"
 
@@ -24,18 +26,18 @@ class Cards extends Component {
         
     }
     
-    async componentDidMount() {
-        await Font.loadAsync({
-            Roboto: require("native-base/Fonts/Roboto.ttf"),
-            Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-        });
-        
-        fetchBoard(this.state.cardId)
-        .then(card => {
-            this.props.dispatchSetBoard(card)
-        })
-        .catch(err => console.error(err));
-    }
+    // async componentDidMount() {
+    //     await Font.loadAsync({
+    //         Roboto: require("native-base/Fonts/Roboto.ttf"),
+    //         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+    //     });
+    
+    //     fetchBoard(this.state.cardId)
+    //     .then(card => {
+    //         this.props.dispatchSetBoard(card)
+    //     })
+    //     .catch(err => console.error(err));
+    // }
     
     
     _renderItem ({item, index}) {
@@ -43,23 +45,28 @@ class Cards extends Component {
         console.log("item " , item)
         return (
             <View style={styles.carousselItem}>
-            
-            <Text style = {styles.cardTitle} >{ item.name }</Text>
-            
-            <View styles = {styles.cardCheckView}>
-            
-            {/* <Text style = {styles.propreties} >Board : { item.idBoard }</Text> */}
-            <Text style = {styles.propreties}>List : { item.idList }</Text>
-            <CheckBox style = {styles.checkbox}
-            center
+            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+            <CheckBox style = {{flex : 1 , flexDirection: 'row', alignContent: 'flex-end', }}
+            size={10}
+            checkedColor={'#7363DD'}
             title='Done'
             checkedIcon='dot-circle-o'
             uncheckedIcon='circle-o'
-            checked={false}
+            checked={(item.done=== "done")}
+            containerStyle={{backgroundColor:'transparent', borderWidth: 0, padding:0}}
             onPress={() => this.setState({checked: !this.state.checked})}
             />
             </View>
+            <Text style = {styles.cardTitle} >{ item.name }</Text>
             
+            {/* <View styles = {{flexDirection : 'row'}}> */}
+            <View >
+            <Text style = {styles.propreties} >Board : { item.idBoard }    List : { item.idList }</Text>
+            </View>
+            {/* </View> */}
+            
+            
+                    
             <Divider style={{ backgroundColor: '#000000' }} />
             <ScrollView contentContainerStyle={styles.contentContainer}>
             <Card style = {styles.cardForDesc}title="Description">
@@ -68,6 +75,7 @@ class Cards extends Component {
             </ScrollView>
             
             </View>
+            
             );
         }
         
@@ -80,6 +88,7 @@ class Cards extends Component {
             
             return(
                 <Carousel 
+                //style= {styles.carousselItem}
                 ref={(c) => { this._carousel = c; }}
                 data={this.props.cardsfiltered}
                 renderItem={this._renderItem}

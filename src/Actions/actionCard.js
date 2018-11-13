@@ -19,14 +19,14 @@ export const initCard = {
 //     }
 // })
 
-// // Action builders
-// export const setCheckCardState = (id, done) => ({
-//     type: SET_CHECK_CARD_STATE,
-//     payload:  {
-//         id,
-//         state: done ? "doing" : "done",
-//     }
-// })
+// Action builders
+export const setCheckCardState = (id, done) => ({
+    type: SET_CHECK_CARD_STATE,
+    payload:  {
+        id,
+        state: done ? "doing" : "done",
+    }
+})
 
 // // Action builders
 // export const changeCardDesc = (id, newDesc) => ({

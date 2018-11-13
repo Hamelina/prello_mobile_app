@@ -15,6 +15,22 @@ class FilterScreen extends Component {
         isDateTimePickerVisible: false,
     };
     
+    static navigationOptions = () => ({
+        title: 'Prello',
+        headerStyle: {
+            height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
+            backgroundColor: '#2196F3'
+        },
+        headerTitleStyle: {
+            marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
+            color: 'white'
+        },
+        headerRight: <Text style = {styles.logout}> Logout</Text>
+        
+        
+    });
+    
+    
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
     _handleDatePicked = (date) => {
@@ -27,7 +43,7 @@ class FilterScreen extends Component {
     onPress = (key) =>{
         const { navigate } = this.props.navigation;
         console.log("pressed,,,"+ this.props.state );
-
+        
         
         switch(key){
             case 2 : 
@@ -60,7 +76,7 @@ class FilterScreen extends Component {
                 }
                 render(){
                     
-
+                    
                     const filterBy = [
                         {key : 1 , name : 'Due Day'}, 
                         {key : 2 ,name : 'Board' }, 
@@ -103,10 +119,10 @@ class FilterScreen extends Component {
                                 })
                             }            />
                             <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleDatePicked}
-                        onCancel={this._hideDateTimePicker}
-                        />
+                            isVisible={this.state.isDateTimePickerVisible}
+                            onConfirm={this._handleDatePicked}
+                            onCancel={this._hideDateTimePicker}
+                            />
                             </React.Fragment>
                             )}
                         }       
