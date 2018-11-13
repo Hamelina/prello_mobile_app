@@ -12,9 +12,9 @@ export const fetchCardsWithFilter = (dueDate,filterBoards , filterLists , filter
 } 
 
 
-export const fetchCards = (idCard) =>  {
+export const fetchCard = (idCard) =>  {
     console.log(idCard);
     return client.get(`/api/board/${idCard}`)
     .then(response => response.data)
     .catch(err => console.log(err))
-  }
+}
