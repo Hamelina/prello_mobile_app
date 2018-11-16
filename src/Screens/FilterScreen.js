@@ -1,11 +1,13 @@
 import React, {Component} from 'react'; 
 import { List, ListItem, Text , Button, Icon} from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
+import {Platform} from 'react-native'; 
 import { connect} from 'react-redux';
 import styles from '../Styles/Filter&SearchStyle'; 
 import DateComponent from '../Components/DateComponent';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import {addDateToFilter , removeDatesFromFilter} from '../Actions/FilterAction'
+import { STATUS_BAR_HEIGHT } from '../constants';
 
 
 
@@ -24,10 +26,7 @@ class FilterScreen extends Component {
         headerTitleStyle: {
             marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
             color: 'white'
-        },
-        headerRight: <Text style = {styles.logout}> Logout</Text>
-        
-        
+        },       
     });
     
     

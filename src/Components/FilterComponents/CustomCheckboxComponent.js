@@ -33,10 +33,8 @@ const CustomCheckboxComponent=({
     checkedColor='red'
     checked={checked}
     onPress={() => {
-
         handleChange()
-        
-        
+
     }
 }
 />

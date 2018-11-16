@@ -11,7 +11,6 @@ export const fetchCardsWithFilter = (dueDate,filterBoards , filterLists , filter
 
 } 
 
-
 export const fetchCard = (idCard) =>  {
     console.log(idCard);
     return client.get(`/api/board/${idCard}`)

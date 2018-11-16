@@ -1,4 +1,3 @@
-import axios from 'axios';
 import client from './client';
 
 import {ErrorLogin, ErrorUncomplete} from './requestErrors';
@@ -16,10 +15,8 @@ const NO_TOKEN = "NO TOKEN";
 export const logIn = (id, password) => (
   client.post("/api/oauth", { id, password })
   .then(response => (
-    client.setCredentials(response.data) &&
+    client.setCredentials(response.data) 
     // Store the token on the front server cookies
-    axios.post("/api/login", response.data)
-    .catch( error => console.error( error ))
     // Its error isn't important
     // Client.post error will waterfall out of this function
   ))
@@ -50,7 +47,7 @@ export const googleLogin = (googleResponse) => (
  */
 export const logOut = () => {
   client.removeJWT();
-  return axios.delete("/api/login");
+  return client ; 
 }
 
 /**
@@ -60,10 +57,8 @@ export const logOut = () => {
 export const signUp = (fullName, email, password) => (
   client.put("/api/oauth", {fullName, email, password})
   .then( response => (
-    client.setCredentials(response.data) &&
+    client.setCredentials(response.data)
     // Store the token on the front server cookies
-    axios.post("/api/login", response.data)
-    .catch(error => console.error(error))
     // Its error isn't important
     // Client.post error will waterfall out of this function
   ))
@@ -80,10 +75,7 @@ export const whoAmI = () => (
   Promise.resolve(client.getJWT() ? client : Promise.reject(NO_TOKEN))
   // If the client doesn't have a token, fetch it on the rendering server
   // !! Those data are not to be trusted !!
-  .catch( error => error === NO_TOKEN ? (
-    axios.get("/api/login")
-    .then( response => client.setCredentials(response.data))
-  ) : Promise.reject(error))
+
   // Once the token exists, fetch log data on api
   .then(client => client.get("/api/oauth"))
   .then( response => response.data)

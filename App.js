@@ -26,7 +26,7 @@ const RootStack = createStackNavigator(
     Signup: {screen : SignupComponent}
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Login',
   }
   );
   export default class App extends React.Component {

@@ -9,7 +9,16 @@ import { logIn } from '../../Request/login';
 
 
 class Login extends Component {
+    onGoogleSuccessHandler = (response) => {
+        console.error(response);
+        googleLogin(response)
+        .then(ok => this.props.history.push('/home'))
+    }
     
+    onGoogleFailureHandler = (response) => {
+        console.error(response);
+        this.setState({ error: "this Google auth has failed" });
+    }
     
     render(){
         return(
@@ -24,7 +33,7 @@ class Login extends Component {
                     
 
                     <Image
-                    style={ styles.logo}
+                    style={styles.logo}
                     source = {require('../../../assets/logo1.png')}
                     />
                 </View>
