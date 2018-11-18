@@ -8,7 +8,7 @@ import styles from "../Styles/CarousselStyle";
 import { Divider , Card, CheckBox} from 'react-native-elements';
 import client from '../Request/client'; 
 
-import {fetchCards} from '../Request/cards'
+import {fetchCardsWithFilter} from '../Request/cards'
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Remote debugger']);
 
@@ -21,25 +21,19 @@ class Cards extends Component {
         super(props);
         this.state = {
             //filter : this.props.navigation.getParam('filter', [])
-            
+            cardsFiltered : []
         }
         
     }
-    
-    // async componentDidMount() {
-    //     await Font.loadAsync({
-    //         Roboto: require("native-base/Fonts/Roboto.ttf"),
-    //         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-    //     });
-    
-    //     fetchBoard(this.state.cardId)
-    //     .then(card => {
-    //         this.props.dispatchSetBoard(card)
-    //     })
-    //     .catch(err => console.error(err));
-    // }
-    
-    
+    //this.setState({cardsFiltered: cards})
+    componentDidMount() {
+        // this.setState({ mountedMatch: this.props.match })
+        // let fil = this.props.filter
+        // fetchCardsWithFilter(fil.dateFilter , fil.boardsFilter, fil.listsFilter, fil.labelsFilter)
+        // .then(cards => console.log("--------success") )
+        // .catch(error => console.error("------------erruer fetching cards filtered", error))
+      }
+
     _renderItem ({item, index}) {
         
         console.log("item " , item)
@@ -84,13 +78,15 @@ class Cards extends Component {
             
             const screenwidth = Dimensions.get("window").width ;
             
-            console.log("props " , this.props);
+            // console.log("props " , this.props);
+            // console.log("state " , this.state);
+
             
             return(
                 <Carousel 
                 //style= {styles.carousselItem}
                 ref={(c) => { this._carousel = c; }}
-                data={this.props.cardsfiltered}
+                data={this.props.cards}
                 renderItem={this._renderItem}
                 sliderWidth={screenwidth}
                 itemWidth={screenwidth*0.75}
@@ -103,7 +99,7 @@ class Cards extends Component {
         const mapStateToProps = (state, props) => console.log(props)||({
             cards: state.cards,
             cardsfiltered : props.cardsfiltered, 
-            filter : props.filter,
+            filter : props.filter || [[], [], [], null ], 
             filterscreen : state.filter, 
             listsFilter : state.filter.listsFilter,
             checked : false
@@ -112,7 +108,6 @@ class Cards extends Component {
         
         const mapDispatchToProps = (dispatch, props) => ({
             dispatchSetCard : (card) => dispatch(setCard(card)),
-            
             changeCardDesc: (event) => dispatch(changeCardDesc(props.id, event.target.value)),
             filterCardsWithFilters: (event) => dispatch(filterCardsWithFilters(props.cardsfiltered, event.target))
         })

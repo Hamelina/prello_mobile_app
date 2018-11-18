@@ -15,3 +15,10 @@ export const fetchBoardCards = (idBoard) =>  {
     return client.get(`/api/board/${idBoard}/cards`)
     .then(response => response.data)
 }
+
+export const fetchUserBoards = (idMember = client.me) => (
+    
+    client.get(`api/members/${idMember}/boards`)
+      .then(response => console.log("dans fetch board user")||response.data)
+      
+  )

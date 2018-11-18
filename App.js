@@ -9,7 +9,6 @@ import BoardsFilterScreen from './src/Screens/BoardsFilterScreen';
 import ListsFilterScreen from './src/Screens/ListsFilterScreen';
 import LabelsFilterScreen from './src/Screens/LabelsFilterScreen';
 import Login from './src/Components/Login/Login'; 
-import SignupComponent from './src/Components/Signup/SignupComponent'; 
 import Application from './src/Components/ApplicationComponent'; 
 
 
@@ -23,7 +22,6 @@ const RootStack = createStackNavigator(
     ListsFilter: {screen : ListsFilterScreen},
     LabelsFilter: {screen : LabelsFilterScreen},
     Login: {screen : Login},
-    Signup: {screen : SignupComponent}
   },
   {
     initialRouteName: 'Login',

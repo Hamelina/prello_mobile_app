@@ -21,8 +21,8 @@ import PropTypes from 'prop-types';
 
 const CustomCheckboxComponent=({
     id, title ,  handleChange, checked, 
-}) => console.log("checkeddd"+checked) || (
-    console.log("checkeddd"+checked),
+}) => (
+    console.log("checkeddd"+title),
     <CheckBox 
     key={id}
     title={title}

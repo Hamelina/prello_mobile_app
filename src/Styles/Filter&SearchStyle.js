@@ -21,6 +21,7 @@ export default StyleSheet.create({
         minWidth : Dimensions.get("window").width*0.5
     },
     buttonWrap : {
+        marginTop : Dimensions.get("window").heigth*4,
         flex : 1,
     }, 
     filterScreen : {

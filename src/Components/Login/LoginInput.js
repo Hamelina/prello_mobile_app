@@ -18,7 +18,7 @@ class LoginInput extends Component {
         }
       }
     
-    
+     
     onPress = (event) => {
         console.log("in OnPress" )
         

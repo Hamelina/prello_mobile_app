@@ -5,14 +5,18 @@ import { withNavigation } from 'react-navigation';
 import boardsFakeData from "../../Data/boards.json" ; 
 import { ListItem , List,Button,Icon ,Text, CheckBox, View } from 'react-native-elements';
 import styles from '../../Styles/Filter&SearchStyle'; 
-import CustomColapsableCheckBoxComponent from './CustomColapsableCheckBoxComponent';
-import {addBoardToFilter , removeBoardFromFilter} from '../../Actions/FilterAction'
+import CustomCheckBoxComponent from './CustomCheckboxComponent';
+import {addBoardToFilter , removeBoardFromFilter} from '../../Actions/FilterAction'; 
+import client from '../../Request/client'
+import {fetchUserBoards} from '../../Request/board'
+import {setBoards} from '../../Actions/actionBoards'
+
 //import {AccordionList} from "accordion-collapse-react-native";
 
 
 class BoardsFilterComponent extends Component{
     
-    constructor(props) {
+    constructor(props){
         super(props);
         
         this.state = {
@@ -31,56 +35,81 @@ class BoardsFilterComponent extends Component{
             
         }
     }
+    componentDidMount(){
+        console.log("-----------idClient", client.credentials);
+        let idClient = client.getCredentials().idUser; 
+        
+        fetchUserBoards()
+        .then (boards => this.props.dispatchUserBoards(boards))
+        .catch(error => console.error(error))
+    }
 
     
     render(){
-        const {boardsFilter} = this.props ;
+        const {boardsFilter, boards, dispatchUserBoards} = this.props ;
+        
         console.disableYellowBox = true;
-        console.log("BoardfilterScreenComponent" , this.props );
-        console.log("BoardfilterScreenComponent" , this.state );
+        console.log("BoardfilterScreenComponent BOAAARD" , boards["boards"] );
 
-        return (
-            
+        console.log("Boardfilter datafdake" , boardsFakeData);
+
+        if(!boards){
+            return (
+              <View >
+                  <Text>LOADING</Text>
+              </View>
+            )
+          }
+          else{
+        return (     
             <List >
             <FlatList style ={styles.component}
-            data = {boardsFakeData}
+            data = {boards["boards"]}
             keyExtractor={this._keyExtractor}
             extraData={boardsFilter}
-            renderItem={({ item : board }) => (
+            renderItem={({ item : board }) =>(
                 <ListItem 
                 
-                hideChevron
+                // hideChevron
                 key={board.id}
                 
                 title={
                     
-                    <CustomColapsableCheckBoxComponent id={board.id} title ={board.name} 
+                    <CustomCheckBoxComponent id={board.id} title ={board.name} 
+                   
                     handleChange={() =>this.handleChange(board.id, boardsFilter.includes(board.id) )} 
                     checked ={boardsFilter.includes(board.id)}
                     />
                     
-                }
-                />                
-                
-                )}
+                }/>)}
                 
                 />
-                </List>
-                
-                
+                </List>   
+            
+           
+
+            // boards.map((board) => (
+            //     <CustomCheckBoxComponent id={board.id} title ={board.name} 
+                   
+            //             handleChange={() =>this.handleChange(board.id, boardsFilter.includes(board.id) )} 
+            //             checked ={boardsFilter.includes(board.id)}
+            //             />
+            //   ))
+            
                 )
             }
             
-        }
-        
-        const mapStateToProps = (state, props) => console.log("board filter component" , state) || ({
-            boardsFilter : state.filter.boardsFilter
+        }}
+
+        const mapStateToProps = (state, props) => console.log("board filter component" , state.boards) || ({
+            boardsFilter : state.filter.boardsFilter, 
+            boards : state.boards,
         })
         
         const mapDispatchToProps = (dispatch, props) => ({
             addBoardToFilter: (idBoard) => dispatch(addBoardToFilter(idBoard)),
-            removeBoardFromFilter: (idBoard) => dispatch(removeBoardFromFilter(idBoard))
-            
+            removeBoardFromFilter: (idBoard) => dispatch(removeBoardFromFilter(idBoard)),
+            dispatchUserBoards : (boards) => dispatch(setBoards(boards))
         })
         
         

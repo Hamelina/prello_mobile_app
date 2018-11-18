@@ -20,8 +20,8 @@ export const logIn = (id, password) => (
     // Its error isn't important
     // Client.post error will waterfall out of this function
   ))
-  .catch(error => Promise.reject(error.response && error.response.status === 400 ? new ErrorUncomplete(error.response.data) : error))
-  .catch(error => Promise.reject(error.response && error.response.status === 401 ? new ErrorLogin(error.response.data) : error))
+  // .catch(error => Promise.reject(error.response && error.response.status === 400 ? new ErrorUncomplete(error.response.data) : error))
+  // .catch(error => Promise.reject(error.response && error.response.status === 401 ? new ErrorLogin(error.response.data) : error))
 );
   
   /**
@@ -51,22 +51,6 @@ export const logOut = () => {
 }
 
 /**
- * @desc 
- * @type {Promise} HTTP(s) request
- */
-export const signUp = (fullName, email, password) => (
-  client.put("/api/oauth", {fullName, email, password})
-  .then( response => (
-    client.setCredentials(response.data)
-    // Store the token on the front server cookies
-    // Its error isn't important
-    // Client.post error will waterfall out of this function
-  ))
-  .catch(error => Promise.reject(error.response && error.response.status === 400 ? new ErrorUncomplete(error.response.data) : error))
-  .catch(error => Promise.reject(error.response && error.response.status === 401 ? new ErrorLogin(error.response.data) : error))
-)
-
-/**
  * @desc fetch data about current user
  * @type {Promise} one or two http request
  * @returns {Object} or null
@@ -82,5 +66,3 @@ export const whoAmI = () => (
   // On 401, the user isn't logged, remove his JWT;
   .catch( error => error.response && error.response.status === 401 ? client.removeJWT() && null : Promise.reject(error))
 );
-
-export const googleLink = () => Promise.resolve();

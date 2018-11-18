@@ -51,7 +51,12 @@ client.removeJWT = () => {
  * 
  */
 client.setCredentials = (credentials) => {
-  client.me = credentials;
+  client.me = credentials.idUser;
+  client.credentials = credentials;
+  client.setJWT(credentials.accessToken);
+return client; 
+  console.log(credentials)
+  console.log(client.credentials)
 }
 
 client.getCredentials = () => {

@@ -17,17 +17,6 @@ class FilterScreen extends Component {
         isDateTimePickerVisible: false,
     };
     
-    static navigationOptions = () => ({
-        title: 'Prello',
-        headerStyle: {
-            height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
-            backgroundColor: '#2196F3'
-        },
-        headerTitleStyle: {
-            marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
-            color: 'white'
-        },       
-    });
     
     
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });

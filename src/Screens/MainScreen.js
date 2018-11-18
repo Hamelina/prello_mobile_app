@@ -20,23 +20,22 @@ class MainScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: '', 
-      appIsReady: false,
+      searchTerm: '',
       filter : this.props.navigation.getParam('filter', 'nonononono')
       
     }
   }
-  static navigationOptions = () => ({
-    title: 'Prello',
-    headerStyle: {
-        height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
-        backgroundColor: '#2196F3'
-    },
-    headerTitleStyle: {
-        marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
-        color: 'white'
-    },       
-});
+//   static navigationOptions = () => ({
+//     title: 'Prello',
+//     headerStyle: {
+//         height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
+//         backgroundColor: '#2196F3'
+//     },
+//     headerTitleStyle: {
+//         marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
+//         color: 'white'
+//     },       
+// });
   searchUpdated(term) {
     console.log("in search updated"), 
     
@@ -44,20 +43,18 @@ class MainScreen extends Component {
   }
   
   
-  // static navigationOptions = () => ({
-  //   title: 'Prello',
-  //   headerStyle: {
-  //     height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
-  //     backgroundColor: '#2196F3'
-  //   },
-  //   headerTitleStyle: {
-  //     marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
-  //     color: 'white'
-  //   },
-  //   headerRight: <Text style = {styles.logout}> Logout</Text>
-  
-  
-  // });
+  static navigationOptions = () => ({
+    title: 'Prello',
+    headerStyle: {
+      height: Platform.OS === 'android' ? 54 + STATUS_BAR_HEIGHT : 54,
+      backgroundColor: '#2196F3'
+    },
+    headerTitleStyle: {
+      marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0,
+      color: 'white'
+    },
+    
+  });
   
   
   //   componentWillMount() {
@@ -86,6 +83,9 @@ class MainScreen extends Component {
         <View  id='mainView'>
         
         <FilterButton style = {styles.buttonWrap}/>
+        <FilterButton style = {styles.buttonWrap}/>
+
+
         <SearchInput 
         onChangeText={(term) => { this.searchUpdated(term) }} 
         // style={styles.searchInput}

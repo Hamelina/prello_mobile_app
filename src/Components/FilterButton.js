@@ -1,8 +1,6 @@
 import React , {Component} from 'react';
 import { Button } from 'react-native-elements'
-import { createStackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
-import{FilterScreen} from '../Screens/FilterScreen'
 
 class FilterButton extends Component{
     
@@ -21,11 +19,12 @@ class FilterButton extends Component{
             raised
             // icon={{name: 'filter_list'}}
             title='Filter'
-            onPress={() =>
+            onPress={() => console.log("filterbuttonPressed")||
                 navigate('Filter')
                 
             }
             />
+            
             )
             
         }
